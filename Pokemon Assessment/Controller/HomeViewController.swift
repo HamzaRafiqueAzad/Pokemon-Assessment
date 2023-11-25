@@ -25,7 +25,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()        
-        self.tabBarController?.tabBar.isHidden = false
         userNameLabel.text = Utility.shared.getUserDetails().0
         view.addSubview(activityIndicatorView)
         activityIndicatorView.center = view.center
@@ -35,8 +34,8 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = Utility.shared.getUserDetails().0
-
     }
     
     @IBAction func backBtnPressed(_ sender: UIButton) {
