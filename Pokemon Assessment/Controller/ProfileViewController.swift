@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
         guard let userName = usernameTextField.text else { return }
         guard let email = emailTextField.text else { return }
         
-        if userName.isEmpty || email.isEmpty {
+        if userName.isEmpty || email.isEmpty || !(Utility.shared.isValidEmail(email: email)){
             return
         }
         

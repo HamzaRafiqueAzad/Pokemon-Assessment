@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var userNameLabel: UILabel!
     var page = 0
     var pokemonArray: [Pokemon] = []
     
@@ -24,10 +25,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()        
-
-
-        let newBackButton = UIBarButtonItem(title: "< Logout", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
+        self.tabBarController?.tabBar.isHidden = false
+        userNameLabel.text = Utility.shared.getUserDetails().0
         view.addSubview(activityIndicatorView)
         activityIndicatorView.center = view.center
         // Do any additional setup after loading the view.
@@ -40,11 +39,10 @@ class HomeViewController: UIViewController {
 
     }
     
-    @objc func back(sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func backBtnPressed(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 0
         Utility.shared.saveUserDetails(userName: "", email: "")
     }
-    
     
     func callPokeArrayDataApi() {
         let url = "\(Constants.Urls.pokeApi)\(page)"

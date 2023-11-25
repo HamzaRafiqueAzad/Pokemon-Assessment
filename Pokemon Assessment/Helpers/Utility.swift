@@ -10,6 +10,14 @@ import Alamofire
 
 class Utility {
     static let shared = Utility()
+    
+    func isValidEmail(email: String) -> Bool {
+        // Regular expression for a simple email format
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
         
     func saveUserDetails(userName: String, email: String) {
         UserDefaults.standard.setValue(userName, forKey: Constants.UserDetails.userName)
